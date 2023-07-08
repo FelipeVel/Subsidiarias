@@ -1,0 +1,39 @@
+.Header {
+  background-color: var(--third-bg-color);
+  display: flex;
+  flex-direction: row;
+  height: 4rem;
+  width: 100%;
+  justify-content: center;
+  &-Container {
+    padding: 0 2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: var(--secondary-bg-color);
+    justify-content: space-between;
+    a {
+      color: var(--secondary-bg-color);
+    }
+  }
+  &-Nav {
+    a {
+      margin: 0 1rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+  }
+  &-Auth {
+    svg {
+      margin-left: 0.5rem;
+    }
+    &_logout {
+      cursor: pointer;
+      transition: color 0.3s ease-in-out;
+      &:hover {
+        color: var(--secondary-text-color);
+      }
+    }
+  }
+}

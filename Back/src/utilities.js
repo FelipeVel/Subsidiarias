@@ -18,35 +18,27 @@ utilities.executeQuery = async (query, res) => {
   try {
     console.log('Conectando BD');
     await sql.connect(connectionConfig);
-    console.log('Ejecutando consulta: ', query);
+    console.log('Query: ', query);
     const result = await sql.query(query);
-    console.log('Resultado', result);
     return result.recordset || [];
   } catch (error) {
     return { error };
-  } finally {
-    sql.close();
   }
 };
 
 utilities.executeTransaction = async (querys, res) => {
   let transaction;
   try {
-    console.log('Conectando BD');
     await sql.connect(connectionConfig);
-    console.log('Ejecutando transaccion: ', querys);
     transaction = new sql.Transaction();
     await transaction.begin();
     for (const query of querys) {
-      console.log('Ejecutando consulta: ', query);
       await transaction.request().query(query);
     }
     await transaction.commit();
-    console.log('Transaccion exitosa');
     return { status: 'Transaccion exitosa' };
   } catch (error) {
     transaction?.rollback();
-    console.log('Transaccion fallida');
     return { error };
   } finally {
     sql.close();
@@ -71,7 +63,6 @@ utilities.generateToken = (empleado) => {
 utilities.verifyAdminToken = (token = undefined) => {
   try {
     const decoded = token ? jwt.verify(token, process.env.JWT_SECRET) : { rol: 0 };
-    console.log('Decoded: ', decoded);
     if (decoded.rol !== 1) {
       return { error: 'No tiene permisos para realizar esta accion' };
     }

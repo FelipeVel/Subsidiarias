@@ -15,6 +15,7 @@ app.use(express.static('static'));
 app.use('/auth', require('./routes/auth.routes'));
 app.use('/empleado', require('./routes/empleado.routes'));
 app.use('/subsidiaria', require('./routes/subsidiaria.routes'));
+app.use('/rol', require('./routes/rol.routes'));
 
 app.listen(puerto, (err) => {
   if (err) {

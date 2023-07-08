@@ -4,17 +4,17 @@ const controller = {};
 controller.login = async (req, res) => {
   const { usuario, contrasena } = req.body;
   const empleado = await utilities.executeQuery(
-    `SELECT * FROM Usuarios WHERE Nombre_Usuario = '${usuario}' AND Contrasena = '${contrasena}'`
+    `SELECT * FROM Empleados WHERE Usuario = '${usuario}' AND Contrasena = '${contrasena}'`
   );
   if (empleado.error) {
-    res.json({ status: 'Error al obtener usuario' });
+    res.status(500).json({ status: 'Error al obtener usuario' });
     return;
   } else if (empleado.length == 0) {
-    res.json({ status: 'Usuario no encontrado' });
+    res.status(404).json({ status: 'Usuario no encontrado' });
     return;
   }
   const token = utilities.generateToken({ ...empleado[0], isValid: true });
-  res.json({ token });
+  res.json({ token, usuario: empleado[0].Nombre_Usuario });
 };
 
 module.exports = controller;

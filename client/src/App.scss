@@ -1,0 +1,12 @@
+.App {
+  text-align: center;
+  height: 100vh;
+  &-Background {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background: url(https://img.freepik.com/vector-gratis/fondo-blanco-patrones-triangulares_1017-18410.jpg?w=1380&t=st=1688771705~exp=1688772305~hmac=14288035bb002a4c51138ec7036d263c2af6f0839afa1afd4ad9545426900442);
+    background-size: cover;
+    z-index: -1;
+  }
+}

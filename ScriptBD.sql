@@ -34,21 +34,13 @@ CREATE TABLE IFX_Prueba.dbo.Empleados
     Id_Empleado INT IDENTITY(1,1) NOT NULL,
     Nombre VARCHAR(50) NOT NULL,
     Apellido VARCHAR(50) NOT NULL,
-    Fecha_Nacimiento DATE NOT NULL,
+    Usuario VARCHAR(50) NOT NULL,
     Id_Subsidiaria INT NOT NULL,
-    CONSTRAINT PK_TB_Empleados PRIMARY KEY (Id_Empleado),
-    CONSTRAINT FK_TB_Empleados_Subsidiarias FOREIGN KEY (Id_Subsidiaria) REFERENCES Subsidiarias(Id_Subsidiaria)
-);
-CREATE TABLE IFX_Prueba.dbo.Usuarios
-(
-    Id_Usuario INT IDENTITY(1,1) NOT NULL,
-    Nombre_Usuario VARCHAR(50) NOT NULL,
     Contrasena VARCHAR(50) NOT NULL,
     Rol INT NOT NULL,
-    Empleado INT NOT NULL,
-    CONSTRAINT PK_TB_Usuarios PRIMARY KEY (Id_Usuario),
-    CONSTRAINT FK_TB_Usuarios_Roles FOREIGN KEY (Rol) REFERENCES Roles(Id_Rol),
-    CONSTRAINT FK_TB_Usuarios_Empleados FOREIGN KEY (Empleado) REFERENCES Empleados(Id_Empleado)
+    CONSTRAINT PK_TB_Empleados PRIMARY KEY (Id_Empleado),
+    CONSTRAINT FK_TB_Empleados_Subsidiarias FOREIGN KEY (Id_Subsidiaria) REFERENCES Subsidiarias(Id_Subsidiaria),
+    CONSTRAINT FK_TB_Empleados_Roles FOREIGN KEY (Rol) REFERENCES Roles(Id_Rol)
 );
 GO
 
@@ -59,9 +51,7 @@ INSERT INTO IFX_Prueba.dbo.Subsidiarias (Nombre, Direccion, Telefono) VALUES ('S
 INSERT INTO IFX_Prueba.dbo.Roles (Nombre) VALUES ('Administrador');
 INSERT INTO IFX_Prueba.dbo.Roles (Nombre) VALUES ('Empleado');
 
-INSERT INTO IFX_Prueba.dbo.Empleados (Nombre, Apellido, Fecha_Nacimiento, Id_Subsidiaria) VALUES ('Empleado 1', 'Apellido 1', '1990-01-01', 1);
-INSERT INTO IFX_Prueba.dbo.Empleados (Nombre, Apellido, Fecha_Nacimiento, Id_Subsidiaria) VALUES ('Empleado 2', 'Apellido 2', '1990-01-01', 2);
-
-INSERT INTO IFX_Prueba.dbo.Usuarios (Nombre_Usuario, Contrasena, Rol, Empleado) VALUES ('Usuario 1', 'Contrasena 1', 1, 1);
-INSERT INTO IFX_Prueba.dbo.Usuarios (Nombre_Usuario, Contrasena, Rol, Empleado) VALUES ('Usuario 2', 'Contrasena 2', 2, 2);
+INSERT INTO IFX_Prueba.dbo.Empleados (Nombre, Apellido, Usuario, Id_Subsidiaria, Contrasena, Rol) VALUES ('Empleado 1', 'Apellido 1', 'Usuario 1', 1, 'Contrasena 1', 1);
+INSERT INTO IFX_Prueba.dbo.Empleados (Nombre, Apellido, Usuario, Id_Subsidiaria, Contrasena, Rol) VALUES ('Empleado 2', 'Apellido 2', 'Usuario 2', 2, 'Contrasena 2', 2);
+INSERT INTO IFX_Prueba.dbo.Empleados (Nombre, Apellido, Usuario, Id_Subsidiaria, Contrasena, Rol) VALUES ('Empleado 3', 'Apellido 3', 'Usuario 3', 1, 'Contrasena 3', 2);
 GO

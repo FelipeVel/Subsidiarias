@@ -1,0 +1,16 @@
+.Subsidiarias {
+  display: flex;
+  align-items: center;
+  &-Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-bg-color);
+    width: fit-content;
+    margin: 5rem auto;
+    padding: 2rem;
+    border: 1px solid var(--primary-border-color);
+    border-radius: 5px;
+  }
+}
