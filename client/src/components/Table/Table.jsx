@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   Table,
   Button,
@@ -17,6 +17,13 @@ const TableComp = ({ data, createHandler, editHandler, deleteHandler, columns })
   const [modalInsertar, setModalInsertar] = useState(false);
   const [modalEditar, setModalEditar] = useState(false);
   const [dataSeleccionada, setDataSeleccionada] = useState({});
+  const [validacion, setValidacion] = useState({});
+  const reqFieldsEdit = columns
+    .filter((column) => column.requiredEdit)
+    .map((column) => column.label);
+  const reqFieldsCreate = columns
+    .filter((column) => column.requiredCreate)
+    .map((column) => column.label);
 
   const abrirCerrarModalInsertar = useCallback(() => {
     setModalInsertar(!modalInsertar);
@@ -32,14 +39,36 @@ const TableComp = ({ data, createHandler, editHandler, deleteHandler, columns })
 
   const crearSubmit = (e) => {
     e.preventDefault();
+    for (const field in reqFieldsCreate) {
+      if (e.target[field].value === '') {
+        setValidacion({ ...validacion, [field]: true });
+        return;
+      }
+    }
     createHandler(e.target);
     abrirCerrarModalInsertar();
   };
 
   const editarSubmit = (e) => {
     e.preventDefault();
+    for (const field in reqFieldsEdit) {
+      if (e.target[field].value === '') {
+        setValidacion({ ...validacion, [field]: true });
+        return;
+      }
+    }
     editHandler(e.target);
     abrirCerrarModalEditar();
+  };
+
+  const blurHandler = (e) => {
+    const { name, value, id } = e.target;
+    const req = id.includes('create') ? reqFieldsCreate : reqFieldsEdit;
+    if (value === '' && req.includes(name)) {
+      setValidacion({ ...validacion, [name]: true });
+    } else {
+      setValidacion({ ...validacion, [name]: false });
+    }
   };
 
   const ModalCrear = (
@@ -60,7 +89,13 @@ const TableComp = ({ data, createHandler, editHandler, deleteHandler, columns })
               <FormGroup>
                 <label>{elemento.label}:</label>
                 {elemento.options ? (
-                  <Input type="select" name={elemento.label} id={elemento.label}>
+                  <Input
+                    type="select"
+                    operation="create"
+                    name={elemento.label}
+                    id={`create_${elemento.label}`}
+                    invalid={validacion[elemento.label]}
+                    onBlur={(e) => blurHandler(e)}>
                     <option value="" disabled selected="selected">
                       Seleccione una opción
                     </option>
@@ -69,11 +104,13 @@ const TableComp = ({ data, createHandler, editHandler, deleteHandler, columns })
                     })}
                   </Input>
                 ) : (
-                  <input
+                  <Input
                     className="form-control"
                     type={elemento.type}
                     name={elemento.label}
-                    id={elemento.label}
+                    id={`create_${elemento.label}`}
+                    invalid={validacion[elemento.label]}
+                    onBlur={(e) => blurHandler(e)}
                   />
                 )}
               </FormGroup>
@@ -93,8 +130,6 @@ const TableComp = ({ data, createHandler, editHandler, deleteHandler, columns })
     </Modal>
   );
 
-  console.log('columns', columns);
-
   const ModalModificar = (
     <Modal isOpen={modalEditar}>
       <ModalHeader>
@@ -109,7 +144,12 @@ const TableComp = ({ data, createHandler, editHandler, deleteHandler, columns })
             <FormGroup>
               <label>{elemento.label}:</label>
               {elemento.options ? (
-                <Input type="select" name={elemento.label} id={elemento.label}>
+                <Input
+                  type="select"
+                  name={elemento.label}
+                  id={`edit_${elemento.label}`}
+                  invalid={validacion[elemento.label]}
+                  onBlur={(e) => blurHandler(e)}>
                   <option value="" disabled selected="selected">
                     Seleccione una opción
                   </option>
@@ -124,13 +164,16 @@ const TableComp = ({ data, createHandler, editHandler, deleteHandler, columns })
                   ))}
                 </Input>
               ) : (
-                <input
+                <Input
                   className="form-control"
                   type={elemento.type}
+                  operation="edit"
                   name={elemento.label}
-                  id={elemento.label}
+                  id={`edit_${elemento.label}`}
                   defaultValue={elemento.private ? '' : dataSeleccionada[elemento.label]}
                   disabled={elemento.label === 'Id_Subsidiaria' || elemento.label === 'Id_Empleado'}
+                  invalid={validacion[elemento.label]}
+                  onBlur={(e) => blurHandler(e)}
                 />
               )}
             </FormGroup>

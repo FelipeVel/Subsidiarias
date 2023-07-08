@@ -12,18 +12,26 @@ const Empleados = () => {
     {
       label: 'Id_Empleado',
       type: 'text',
+      requiredCreate: false,
+      requiredEdit: true,
     },
     {
       label: 'Nombre',
       type: 'text',
+      requiredCreate: true,
+      requiredEdit: true,
     },
     {
       label: 'Apellido',
       type: 'text',
+      requiredCreate: true,
+      requiredEdit: true,
     },
     {
       label: 'Usuario',
       type: 'text',
+      requiredCreate: true,
+      requiredEdit: true,
     },
     {
       label: 'Subsidiaria',
@@ -32,6 +40,8 @@ const Empleados = () => {
         label: subsidiaria.Nombre,
         value: subsidiaria.Id_Subsidiaria,
       })),
+      requiredCreate: true,
+      requiredEdit: true,
     },
     {
       label: 'Rol',
@@ -40,11 +50,15 @@ const Empleados = () => {
         label: rol.Nombre,
         value: rol.Id_Rol,
       })),
+      requiredCreate: true,
+      requiredEdit: true,
     },
     {
       label: 'Contrasena',
       type: 'password',
       private: true,
+      requiredCreate: true,
+      requiredEdit: false,
     },
   ];
 

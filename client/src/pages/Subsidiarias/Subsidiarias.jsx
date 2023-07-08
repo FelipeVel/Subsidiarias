@@ -10,18 +10,26 @@ const Subsidiarias = () => {
     {
       label: 'Id_Subsidiaria',
       type: 'text',
+      requiredCreate: false,
+      requiredEdit: true,
     },
     {
       label: 'Nombre',
       type: 'text',
+      requiredCreate: true,
+      requiredEdit: true,
     },
     {
       label: 'Direccion',
       type: 'text',
+      requiredCreate: true,
+      requiredEdit: true,
     },
     {
       label: 'Telefono',
       type: 'text',
+      requiredCreate: true,
+      requiredEdit: true,
     },
   ];
   useEffect(() => {
