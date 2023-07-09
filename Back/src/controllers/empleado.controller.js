@@ -26,6 +26,7 @@ controller.getEmpleados = async (req, res) => {
     );
     delete empleado.Id_Subsidiaria;
     empleado.Rol = roles.find((rol) => rol.Id_Rol === empleado.Rol);
+    delete empleado.Contrasena;
   });
   res.status(200).json(empleados);
 };
@@ -53,6 +54,7 @@ controller.getEmpleado = async (req, res) => {
   delete empleado[0].Id_Subsidiaria;
   const rol = await utilities.executeQuery(`SELECT * FROM Roles WHERE Id_Rol = ${empleado[0].Rol}`);
   empleado[0].Rol = rol[0];
+  delete empleado[0].Contrasena;
   res.json(empleado[0]);
 };
 

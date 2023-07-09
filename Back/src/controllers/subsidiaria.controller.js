@@ -67,7 +67,10 @@ controller.deleteSubsidiaria = async (req, res) => {
   );
   if (subsidiaria.error) {
     console.log(subsidiaria.error);
-    res.status(500).json({ status: 'Error al eliminar subsidiaria' });
+    res.status(500).json({
+      status: 'Error al eliminar subsidiaria',
+      error: { name: subsidiaria.error.name, message: subsidiaria.error.message },
+    });
     return;
   } else if (subsidiaria.rowsAffected[0] === 0) {
     res.status(404).json({ status: 'Subsidiaria no encontrada' });
