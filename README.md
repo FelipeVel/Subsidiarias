@@ -56,7 +56,7 @@ Por último, se configura el cliente, para esto se debe navegar otra vez a la ru
 
 Una vez se ejecutaron estas lineas, se debe crear también en la carpeta `client` un archivo .env con las siguientes variables de entorno:
 
-- REACT_APP_API_URL: Ruta donde se ejecuta el API, por defecto es 'http://localhost:3080'
+- REACT_APP_API_URL: Ruta donde se ejecuta el API (Ej. 'http://localhost:3080')
 
 Una vez se tiene configurado el entorno, se puede ejecutar el cliente con el comando `npm start`.
 
