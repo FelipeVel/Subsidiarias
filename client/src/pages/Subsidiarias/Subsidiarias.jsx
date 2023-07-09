@@ -68,7 +68,7 @@ const Subsidiarias = () => {
       })
       .catch((err) => {
         console.log(err);
-        window.alert(err.response.data.error.message);
+        window.alert('No se pudo registrar la subsidiaria: ' + err.response.data.error.message);
       });
   };
 
@@ -93,10 +93,7 @@ const Subsidiarias = () => {
       })
       .catch((err) => {
         console.log(err);
-        window.alert(
-          'No se pudo editar la subsidiaria: ' + err.response.data.error.message ??
-            err.response.data.error
-        );
+        window.alert('No se pudo editar la subsidiaria: ' + err.response.data.error.message);
       });
   };
 
@@ -115,6 +112,8 @@ const Subsidiarias = () => {
         console.log(err);
         if (err.response.data.error.name === 'RequestError') {
           window.alert('No se puede eliminar una subsidiaria con empleados asignados');
+        } else {
+          window.alert('No se pudo eliminar la subsidiaria: ' + err.response.data.error.message);
         }
       });
   };

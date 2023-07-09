@@ -132,7 +132,7 @@ const Empleados = () => {
       })
       .catch((err) => {
         console.log(err);
-        window.alert(err.response.data.error.message);
+        window.alert('No se pudo crear el empleado: ' + err.response.data.error.message);
       });
   };
 
@@ -157,7 +157,7 @@ const Empleados = () => {
       })
       .catch((err) => {
         console.log('Error:', err);
-        window.alert(err.response.data.error.message);
+        window.alert('No se pudo editar el empleado: ' + err.response.data.error.message);
       });
   };
 
@@ -174,7 +174,7 @@ const Empleados = () => {
       })
       .catch((err) => {
         console.log(err);
-        window.alert(err.response.data.error);
+        window.alert('No se pudo eliminar el empleado: ' + err.response.data.error.message);
       });
   };
 
