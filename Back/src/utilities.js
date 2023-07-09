@@ -1,6 +1,5 @@
 const sql = require('mssql');
 const jwt = require('jsonwebtoken');
-const jwtDecode = require('jwt-decode');
 const utilities = {};
 const connectionConfig = {
   user: process.env.DB_USER,
