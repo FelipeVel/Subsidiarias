@@ -76,7 +76,7 @@ Para la ejecución de pruebas unitarias, se debe ejecutar el script de la base d
 
 Para el cliente, también se cuenta con pruebas unitarias sobre el componente Table, estas también pueden ser ejecutadas con el comando `npm test` en la carpeta client.
 
-Al abrir los archivos html de la carpeta [coverage](/Back/coverage/Icov-report/), se puede ver un reporte de la cobertura de pruebas unitarias con porcentajes de líneas evaluadas.
+Al abrir los archivos html de la carpeta [coverage](/Back/coverage/lcov-report/), se puede ver un reporte de la cobertura de pruebas unitarias con porcentajes de líneas evaluadas.
 
 ## Documentación del API
 
