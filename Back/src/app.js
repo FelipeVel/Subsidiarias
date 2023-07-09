@@ -1,10 +1,12 @@
 const express = require('express'),
   app = express(),
   bodyParser = require('body-parser'),
-  cors = require('cors');
+  cors = require('cors'),
+  morgan = require('morgan');
 
 app.use(cors());
 require('dotenv').config();
+app.use(morgan('tiny'));
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
