@@ -63,3 +63,7 @@ Una vez se tiene configurado el entorno, se puede ejecutar el cliente con el com
 ## Pruebas unitarias
 
 Para la ejecución de pruebas unitarias, se debe ejecutar el script de la base de datos por defecto para tener los ids necesarios y, en la carpeta Back, se debe ejecutar el comando `npm test`.
+
+## Documentación del API
+
+El API cuenta con documentación con Swagger, se puede acceder a ella mediante el endpoint `/api-docs`, este endpoint es mostrado en la consola en el momento de ejecución del API.
