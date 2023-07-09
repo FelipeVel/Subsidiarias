@@ -76,6 +76,8 @@ Para la ejecución de pruebas unitarias, se debe ejecutar el script de la base d
 
 Para el cliente, también se cuenta con pruebas unitarias sobre el componente Table, estas también pueden ser ejecutadas con el comando `npm test` en la carpeta client.
 
+Al abrir los archivos html de la carpeta [coverage](/Back/coverage/), se puede ver un reporte de la cobertura de pruebas unitarias con porcentajes de líneas evaluadas.
+
 ## Documentación del API
 
 El API cuenta con documentación con Swagger, se puede acceder a ella mediante el endpoint `/api-docs`, este endpoint es mostrado en la consola en el momento de ejecución del API.
