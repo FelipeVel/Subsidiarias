@@ -68,6 +68,7 @@ const Subsidiarias = () => {
       })
       .catch((err) => {
         console.log(err);
+        window.alert(err.response.data.error.message);
       });
   };
 
@@ -112,6 +113,9 @@ const Subsidiarias = () => {
       })
       .catch((err) => {
         console.log(err);
+        if (err.response.data.error.name === 'RequestError') {
+          window.alert('No se puede eliminar una subsidiaria con empleados asignados');
+        }
       });
   };
 

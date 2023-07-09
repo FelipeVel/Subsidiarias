@@ -132,7 +132,7 @@ const Empleados = () => {
       })
       .catch((err) => {
         console.log(err);
-        window.alert(err.response.data.error.message ?? err.response.data.error);
+        window.alert(err.response.data.error.message);
       });
   };
 
@@ -157,13 +157,7 @@ const Empleados = () => {
       })
       .catch((err) => {
         console.log('Error:', err);
-        window.alert(
-          `${err.response.data.status}: ${
-            err.response.data.error.message
-              ? err.response.data.error.message
-              : err.response.data.error
-          }`
-        );
+        window.alert(err.response.data.error.message);
       });
   };
 
