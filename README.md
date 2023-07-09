@@ -1,5 +1,15 @@
 # Sistema de gestión de subsidiarias
 
+## Tecnologias usadas:
+
+Para el desarrollo del sistema se utilizó:
+
+- [NodeJs](https://nodejs.org/en/about) para el back-end
+- [ReactJs](https://react.dev/) para el front-end
+- [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/) para la base de datos
+- [Swagger](https://swagger.io/) para la documentación
+- [Jest](https://jestjs.io/) y [Supertest](https://www.npmjs.com/package/supertest) para pruebas unitarias
+
 ## Pre-requisitos:
 
 Para la ejecución de este sistema, es necesario tener instaladas las siguientes herramientas:
