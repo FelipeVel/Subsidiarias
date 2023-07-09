@@ -29,14 +29,18 @@ controller.getSubsidiaria = async (req, res) => {
 };
 
 controller.createSubsidiaria = async (req, res) => {
-  const adminPermissions = utilities.verifyAdminToken(
-    req.headers.authorization?.split(' ')[1] || ''
-  );
-  if (adminPermissions.error) {
-    res.status(500).json({ status: 'Error al verificar token', error: adminPermissions.error });
+  const { nombre, direccion, telefono } = req.body;
+  if (!nombre || !direccion || !telefono) {
+    res.status(400).json({ status: 'Faltan datos' });
     return;
   }
-  const { nombre, direccion, telefono } = req.body;
+  const adminPermissions = utilities.verifyAdminToken(req.headers.authorization?.split(' ')[1]);
+  if (adminPermissions.error) {
+    res
+      .status(adminPermissions.error.status)
+      .json({ status: 'Error al verificar token', error: adminPermissions.error });
+    return;
+  }
   const subsidiaria = await utilities.executeQuery(
     `INSERT INTO Subsidiarias (Nombre, Direccion, Telefono) VALUES ('${nombre}', '${direccion}', '${telefono}')`
   );
@@ -44,7 +48,7 @@ controller.createSubsidiaria = async (req, res) => {
     res.status(500).json({ status: 'Error al crear subsidiaria' });
     return;
   }
-  res.json({ status: 'Subsidiaria creado' });
+  res.status(201).json({ status: 'Subsidiaria creado' });
 };
 
 controller.deleteSubsidiaria = async (req, res) => {
@@ -52,7 +56,9 @@ controller.deleteSubsidiaria = async (req, res) => {
     req.headers.authorization?.split(' ')[1] || ''
   );
   if (adminPermissions.error) {
-    res.status(500).json({ status: 'Error al verificar token', error: adminPermissions.error });
+    res
+      .status(adminPermissions.error.status)
+      .json({ status: 'Error al verificar token', error: adminPermissions.error });
     return;
   }
   const { id } = req.params;
@@ -60,22 +66,32 @@ controller.deleteSubsidiaria = async (req, res) => {
     `DELETE FROM Subsidiarias WHERE Id_Subsidiaria = ${id}`
   );
   if (subsidiaria.error) {
+    console.log(subsidiaria.error);
     res.status(500).json({ status: 'Error al eliminar subsidiaria' });
+    return;
+  } else if (subsidiaria.rowsAffected[0] === 0) {
+    res.status(404).json({ status: 'Subsidiaria no encontrada' });
     return;
   }
   res.json({ status: 'Subsidiaria eliminado' });
 };
 
 controller.updateSubsidiaria = async (req, res) => {
+  const { id } = req.params;
+  const { nombre, direccion, telefono } = req.body;
+  if (!nombre && !direccion && !telefono) {
+    res.status(400).json({ status: 'Faltan datos' });
+    return;
+  }
   const adminPermissions = utilities.verifyAdminToken(
     req.headers.authorization?.split(' ')[1] || ''
   );
   if (adminPermissions.error) {
-    res.status(500).json({ status: 'Error al verificar token', error: adminPermissions.error });
+    res
+      .status(adminPermissions.error.status)
+      .json({ status: 'Error al verificar token', error: adminPermissions.error });
     return;
   }
-  const { id } = req.params;
-  const { nombre, direccion, telefono } = req.body;
   let query = `UPDATE Subsidiarias SET `;
   if (nombre) query += `Nombre = '${nombre}', `;
   if (direccion) query += `Direccion = '${direccion}', `;
@@ -85,6 +101,9 @@ controller.updateSubsidiaria = async (req, res) => {
   const subsidiaria = await utilities.executeQuery(query);
   if (subsidiaria.error) {
     res.status(500).json({ status: 'Error al actualizar subsidiaria' });
+    return;
+  } else if (subsidiaria.rowsAffected[0] === 0) {
+    res.status(404).json({ status: 'Subsidiaria no encontrada' });
     return;
   }
   res.json({ status: 'Subsidiaria actualizado' });

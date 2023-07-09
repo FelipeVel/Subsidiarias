@@ -92,6 +92,10 @@ const Subsidiarias = () => {
       })
       .catch((err) => {
         console.log(err);
+        window.alert(
+          'No se pudo editar la subsidiaria: ' + err.response.data.error.message ??
+            err.response.data.error
+        );
       });
   };
 

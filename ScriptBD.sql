@@ -47,6 +47,7 @@ GO
 -- Data insertion
 INSERT INTO IFX_Prueba.dbo.Subsidiarias (Nombre, Direccion, Telefono) VALUES ('Subsidiaria 1', 'Direccion 1', 'Telefono 1');
 INSERT INTO IFX_Prueba.dbo.Subsidiarias (Nombre, Direccion, Telefono) VALUES ('Subsidiaria 2', 'Direccion 2', 'Telefono 2');
+INSERT INTO IFX_Prueba.dbo.Subsidiarias (Nombre, Direccion, Telefono) VALUES ('Subsidiaria 3', 'Direccion 3', 'Telefono 3');
 
 INSERT INTO IFX_Prueba.dbo.Roles (Nombre) VALUES ('Administrador');
 INSERT INTO IFX_Prueba.dbo.Roles (Nombre) VALUES ('Empleado');
@@ -54,4 +55,7 @@ INSERT INTO IFX_Prueba.dbo.Roles (Nombre) VALUES ('Empleado');
 INSERT INTO IFX_Prueba.dbo.Empleados (Nombre, Apellido, Usuario, Id_Subsidiaria, Contrasena, Rol) VALUES ('Empleado 1', 'Apellido 1', 'Usuario 1', 1, 'Contrasena 1', 1);
 INSERT INTO IFX_Prueba.dbo.Empleados (Nombre, Apellido, Usuario, Id_Subsidiaria, Contrasena, Rol) VALUES ('Empleado 2', 'Apellido 2', 'Usuario 2', 2, 'Contrasena 2', 2);
 INSERT INTO IFX_Prueba.dbo.Empleados (Nombre, Apellido, Usuario, Id_Subsidiaria, Contrasena, Rol) VALUES ('Empleado 3', 'Apellido 3', 'Usuario 3', 1, 'Contrasena 3', 2);
+INSERT INTO IFX_Prueba.dbo.Empleados (Nombre, Apellido, Usuario, Id_Subsidiaria, Contrasena, Rol) VALUES ('Empleado 4', 'Apellido 4', 'Usuario 4', 2, 'Contrasena 4', 1);
+INSERT INTO IFX_Prueba.dbo.Empleados (Nombre, Apellido, Usuario, Id_Subsidiaria, Contrasena, Rol) VALUES ('Empleado 5', 'Apellido 5', 'Usuario 5', 1, 'Contrasena 5', 2);
+INSERT INTO IFX_Prueba.dbo.Empleados (Nombre, Apellido, Usuario, Id_Subsidiaria, Contrasena, Rol) VALUES ('Empleado 6', 'Apellido 6', 'Usuario 6', 2, 'Contrasena 6', 1);
 GO

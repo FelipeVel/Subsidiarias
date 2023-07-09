@@ -10,11 +10,11 @@ controller.login = async (req, res) => {
     res.status(500).json({ status: 'Error al obtener usuario' });
     return;
   } else if (empleado.length == 0) {
-    res.status(404).json({ status: 'Usuario no encontrado' });
+    res.status(401).json({ status: 'Usuario no encontrado' });
     return;
   }
   const token = utilities.generateToken({ ...empleado[0], isValid: true });
-  res.json({ token, usuario: empleado[0].Nombre_Usuario });
+  res.status(200).json({ token: token });
 };
 
 module.exports = controller;

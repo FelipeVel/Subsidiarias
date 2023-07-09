@@ -16,11 +16,9 @@ const connectionConfig = {
 
 utilities.executeQuery = async (query, res) => {
   try {
-    console.log('Conectando BD');
     await sql.connect(connectionConfig);
-    console.log('Query: ', query);
     const result = await sql.query(query);
-    return result.recordset || [];
+    return result.recordset || result;
   } catch (error) {
     return { error };
   }
@@ -60,15 +58,21 @@ utilities.generateToken = (empleado) => {
   return token;
 };
 
-utilities.verifyAdminToken = (token = undefined) => {
+utilities.verifyAdminToken = (token) => {
   try {
-    const decoded = token ? jwt.verify(token, process.env.JWT_SECRET) : { rol: 0 };
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     if (decoded.rol !== 1) {
-      return { error: 'No tiene permisos para realizar esta accion' };
+      return {
+        error: {
+          name: 'Forbidden',
+          message: 'No tiene permisos para realizar esta accion',
+          status: 403,
+        },
+      };
     }
     return decoded;
   } catch (error) {
-    return { error };
+    return { error: { name: error.name, message: error.message, status: 401 } };
   }
 };
 
