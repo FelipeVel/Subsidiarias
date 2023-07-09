@@ -76,7 +76,7 @@ controller.deleteSubsidiaria = async (req, res) => {
     res.status(404).json({ status: 'Subsidiaria no encontrada' });
     return;
   }
-  res.json({ status: 'Subsidiaria eliminado' });
+  res.json({ status: 'Subsidiaria eliminada' });
 };
 
 controller.updateSubsidiaria = async (req, res) => {
@@ -109,7 +109,7 @@ controller.updateSubsidiaria = async (req, res) => {
     res.status(404).json({ status: 'Subsidiaria no encontrada' });
     return;
   }
-  res.json({ status: 'Subsidiaria actualizado' });
+  res.json({ status: 'Subsidiaria actualizada' });
 };
 
 module.exports = controller;
